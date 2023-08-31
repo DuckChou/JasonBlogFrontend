@@ -1,0 +1,38 @@
+.introduction {
+  height: 100vh;
+  width: 100vw;
+  background-color: #141516;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+.introduction p {
+  display: flex;
+  color: white;
+  font-size: 60px;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+}
+.introduction span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.introduction svg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: calc(100% + 300px);
+}
+.introduction ßpath {
+  fill: #141516;
+}
