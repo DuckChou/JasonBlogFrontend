@@ -3,23 +3,23 @@ import authorImage from "../../assets/images/myphoto.png";
 
 import { Link } from "react-router-dom";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 export default function RecentCard(props) {
   return (
     <li>
       <div className="blog-card">
         <figure className="card-banner img-holder">
-          <Link
-            to={process.env.REACT_APP_FRONTEND_URL+`/post/${props.id}`}
-       
-          >
-          <img
-            src={process.env.REACT_APP_ASSET_URL+`/${props.thumbnail}`}
-            width="300"
-            height="360"
-            loading="lazy"
-            alt="The trick to getting more done is to have the freedom to roam around "
-            className="img-cover"
-          />
+          <Link to={process.env.REACT_APP_FRONTEND_URL + `/post/${props.id}`}>
+            <LazyLoadImage
+              src={process.env.REACT_APP_ASSET_URL + `/${props.thumbnail}`}
+              width="300"
+              height="360"
+              effect="blur"
+              alt="thumbnail"
+              className="img-cover"
+            />
           </Link>
 
           <ul className="avatar-list absolute">
@@ -41,7 +41,7 @@ export default function RecentCard(props) {
         <div className="card-content">
           <h3 className="h5">
             <Link
-              to={process.env.REACT_APP_FRONTEND_URL+`/post/${props.id}`}
+              to={process.env.REACT_APP_FRONTEND_URL + `/post/${props.id}`}
               className="card-title hover:underline"
             >
               {props.title}
