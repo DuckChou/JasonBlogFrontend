@@ -1,14 +1,19 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { AuthContext } from "../../shared/context/auth-context";
+
 import LoginModal from "../layout/LoginModal";
 import SignupModal from "../layout/SignupModal";
-import AuthorImage from "../../assets/images/author.jpg";
+import MessageModal from "../shared/MessageModal";
 
 export default function Header() {
   const [active, setActive] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
+
+  const auth = useContext(AuthContext);
 
   const toggleActive = () => {
     setActive(!active);
@@ -20,6 +25,16 @@ export default function Header() {
 
   const toggleSignup = () => {
     setShowSignup(!showSignup);
+  };
+
+  const toggleShowLogout = () => {
+    setShowLogout(!showLogout);
+  };
+
+  const logout = () => {
+    auth.logout();
+    toggleActive();
+    toggleShowLogout();
   };
 
   return (
@@ -40,7 +55,7 @@ export default function Header() {
 
               <li className="navbar-item">
                 <a
-                  href="/postGallery/1"
+                  href="/postGallery/tech"
                   className="navbar-link hover:underline"
                 >
                   Tech Post
@@ -49,18 +64,18 @@ export default function Header() {
 
               <li className="navbar-item">
                 <a
-                  href="/postGallery/2"
+                  href="/postGallery/life"
                   className="navbar-link hover:underline"
                 >
                   Life Post
                 </a>
               </li>
 
-              <li className="navbar-item">
+              {/* <li className="navbar-item">
                 <a href="/info" className="navbar-link hover:underline">
                   Info
                 </a>
-              </li>
+              </li> */}
 
               <li className="navbar-item">
                 <a
@@ -70,7 +85,7 @@ export default function Header() {
                   Portfolio
                 </a>
               </li>
-              {!isLogin && (
+              {!auth.isLoggedIn && (
                 <>
                   <hr />
                   <li className="navbar-item login-btn">
@@ -91,11 +106,24 @@ export default function Header() {
                   </li>
                 </>
               )}
+              {auth.isLoggedIn && (
+                <>
+                  <hr />
+                  <li className="navbar-item login-btn">
+                    <button
+                      className="navbar-link-button"
+                      onClick={toggleShowLogout}
+                    >
+                      logout
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </nav>
 
           <div className="wrapper">
-            {!isLogin && (
+            {!auth.isLoggedIn && (
               <button className="search-btn" onClick={toggleSignup}>
                 signup
               </button>
@@ -110,15 +138,20 @@ export default function Header() {
               <span className="span three"></span>
             </button>
 
-            {!isLogin && (
+            {!auth.isLoggedIn && (
               <button to="#" className="btn" onClick={toggleLogin}>
                 login
               </button>
             )}
+            {auth.isLoggedIn && (
+              <button to="#" className="btn" onClick={toggleShowLogout}>
+                logout
+              </button>
+            )}
 
-            {isLogin && (
+            {auth.isLoggedIn && (
               <div className="profile-container">
-                <img src={AuthorImage} alt="avatar" />
+                <img src={auth.image} alt="avatar" />
               </div>
             )}
           </div>
@@ -126,6 +159,12 @@ export default function Header() {
       </header>
       <LoginModal show={showLogin} onHide={toggleLogin} />
       <SignupModal show={showSignup} onHide={toggleSignup} />
+      <MessageModal
+        mes={"Are you sure to logout?"}
+        show={showLogout}
+        onClear={toggleShowLogout}
+        handler={logout}
+      />
     </>
   );
 }

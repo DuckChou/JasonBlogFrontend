@@ -1,0 +1,55 @@
+.post-btn{
+    background-color: #1E90FF;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    outline: none;
+    transition: 0.3s;
+    min-width: 71px;
+}
+
+.post-btn:hover{
+  background-color: #00BFFF;
+}
+
+.post-delete-btn{
+    background-color: #FF0000;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    outline: none;
+    transition: 0.3s;
+    min-width: 71px;
+}
+
+.post-delete-btn:hover{
+  background-color: #FF4500;
+}
+
+.post-delete-btn:active{
+    background-color: #FF0000;
+}
+
+.post-btn:active{
+    background-color: #1E90FF;
+}
+
+td{
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+
+

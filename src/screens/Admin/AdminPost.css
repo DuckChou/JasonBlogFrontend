@@ -1,0 +1,89 @@
+.introduction-textarea{
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+
+}
+
+.input-box {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+
+.post-tag {
+  background-color: var(--light-gray-2);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition-1);
+}
+
+.post-tag:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.add-icon{
+  position: absolute;
+  right: 0;
+  top:0;
+  height: 100%;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: var(--light-gray-2);
+}
+
+.add-icon:hover{
+  background-color: var(--eerie-black_60);
+  cursor: pointer;
+}
+
+.delete-icon{
+  position: absolute;
+  right: 0;
+  top:0;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  text-align: center;
+  background-color: white;
+}
+
+.post-type {
+  background-color: var(--light-gray-2);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition-1);
+}
+
+.post-type:hover {
+  cursor: pointer;
+}
+
+.post-type-active{
+  background-color: black;
+  color: white;
+}

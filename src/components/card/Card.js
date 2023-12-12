@@ -1,35 +1,36 @@
-import feature1 from "../../assets/images/featured.jpg";
-import author1 from "../../assets/images/author.jpg";
+import myphoto from "../../assets/images/myphoto.png"
+import { Link } from "react-router-dom";
+import { generateDate } from "../../shared/utils/getDate";
+
+import "./Card.css";
 
 export default function Card({
   thumbnail,
   title,
-  description,
-  category,
+  intro,
+  tags,
   date,
-  author,
   viewCount,
+  id,
 }) {
   return (
     <>
       <div className="blog-card">
         <figure className="card-banner img-holder">
-          <img
-            src={feature1}
-            width="500px"
-            height="600px"
-            loading="lazy"
-            alt="New technology is not good or evil in and of itself"
-            className="img-cover"
-          />
+          <Link to={process.env.REACT_APP_FRONTEND_URL+`/post/${id}`}>
+            <img
+              src={process.env.REACT_APP_ASSET_URL+`/${thumbnail}`}
+              loading="lazy"
+              alt="thumbnail"
+              className="thumbnail-cover"
+            />
+          </Link>
 
           <ul className="avatar-list absolute">
             <li className="avatar-item">
               <div className="avatar img-holder">
                 <img
-                  src={author1}
-                  width="100px"
-                  height="100px"
+                  src={myphoto}
                   loading="lazy"
                   alt="Author"
                   className="img-cover"
@@ -38,44 +39,34 @@ export default function Card({
             </li>
           </ul>
           <div href="#" className="view-tag">
-            100 views
+            {viewCount || "100 views"}
           </div>
         </figure>
 
         <div className="card-content">
+          <div className="mb-3">
+            <span className="meta-item">{generateDate(date)}</span>
+          </div>
           <ul className="card-meta-list">
-            <li>
-              <div href="#" className="card-tag">
-                Design
-              </div>
-            </li>
-
-            <li>
-              <div href="#" className="card-tag">
-                Idea
-              </div>
-            </li>
-
-            <li>
-              <div href="#" className="card-tag">
-                Review
-              </div>
-            </li>
+            {tags.map((tag, index) => (
+              <li key={index}>
+                <div href="#" className="card-tag">
+                  {tag}
+                </div>
+              </li>
+            ))}
           </ul>
 
           <h3 className="h4">
-            <a href="#" className="card-title hover:underline">
-              New technology is not good or evil in and of itself
-            </a>
+            <Link
+              to={process.env.REACT_APP_FRONTEND_URL+`/post/${id}`}
+              className="card-title hover:underline"
+            >
+              {title}
+            </Link>
           </h3>
 
-          <p className="card-text">
-            Vestibulum vehicula dui venenatis neque tempor, accumsan iaculis
-            sapien ornare. Sed at ante porta, ullamcorper massa eu, ullamcorper
-            sapien. Donec pretium tortor augue. Integer egestas ut tellus sed
-            pretium. Nullam tristique augue ut mattis vulputate. Duis et lorem
-            in odio ultricies porttitor.
-          </p>
+          <p className="card-text">{intro}</p>
         </div>
       </div>
     </>

@@ -89,7 +89,7 @@ ul {
 
 a,
 img,
-span,
+
 input,
 button,
 ion-icon {
@@ -251,7 +251,7 @@ body {
 .btn {
   background-color: var(--eerie-black);
   color: var(--white);
-  font-size: var(--fs-6);
+  font-size: 1.6rem;
   font-weight: var(--fw-500);
   line-height: 1.3;
   padding: 11px 25px;
@@ -283,6 +283,17 @@ body {
 .img-cover {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1/1;
+
+  object-fit: cover;
+}
+
+.thumbnail-cover{
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  aspect-ratio: 16/9;
+
   object-fit: cover;
 }
 
@@ -319,14 +330,22 @@ body {
 }
 
 .scrollbar-item {
-  min-width: 30%;
+  min-width: 40%;
   scroll-snap-align: center;
+}
+
+.card-banner {
+  transition: all 0.3s;
+}
+
+.card-banner:hover {
+  transform: translateY(-20px);
 }
 
 .blog-card .card-banner {
   position: relative;
   border-radius: var(--radius-16);
-  margin-block-end: 15px;
+  margin-block-end: 10px;
 }
 
 .avatar-list {
@@ -456,7 +475,23 @@ body {
   background-color: var(--eerie-black);
   width: 30px;
   height: 3px;
+  display: block;
   transition: var(--transition-1);
+}
+
+.nav-toggle-btn{
+  padding: 10px;
+  border-radius: 20%;
+  background-color: var(--cultured);
+  border: 2px solid white;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.nav-toggle-btn:hover{
+  
+  border-color: rgba(104, 147, 226, 0.5);
+  box-shadow: 0 0 40px rgb(29, 85, 189); /* Horizontal offset, vertical offset, blur radius, color */
+
 }
 
 .nav-toggle-btn .span:not(:last-child) {
@@ -545,10 +580,10 @@ body {
 .textbox-btn {
   background-color: var(--eerie-black);
   color: var(--white);
-  font-size: var(--fs-6);
+  font-size: var(--fs-5)!important;
   font-weight: var(--fw-500);
   line-height: 1.3;
-  padding: 11px 25px;
+  padding: 11px 25px!important;
   border-radius: var(--radius-pill) !important;
   transition: var(--transition-1);
   width: 100%;
@@ -660,7 +695,12 @@ body {
   height: 40px;
   margin-right: 10px;
   margin-top: 30px;
+  transition: all 0.5s;
 }
+.section .icon:hover{
+  transform: translateY(-10px);
+}
+
 
 /*-----------------------------------*\
   #RECENT POST
@@ -773,7 +813,7 @@ pre {
 .section .menu {
   position: sticky;
   top: 50px;
-  z-index: 1000;
+  /* z-index: 1000; */
 }
 
 .markdown-body img {
@@ -906,6 +946,11 @@ pre {
   display: inline-block;
 }
 
+
+
+
+
+
 /*-----------------------------------*\
   #MEDIA QUERIES
 \*-----------------------------------*/
@@ -963,7 +1008,7 @@ pre {
   }
 
   .scrollbar-item {
-    width: 40%;
+    min-width: 45%;
   }
 
   .grid-list {
@@ -1049,7 +1094,8 @@ pre {
   }
 
   .scrollbar-item {
-    width: 30%;
+    min-width: 30%;
+    width: 40%;
   }
 
   .grid-list {

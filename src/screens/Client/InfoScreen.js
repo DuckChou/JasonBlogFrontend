@@ -1,4 +1,4 @@
-import Preloader from "../components/banner/Preloader";
+import Preloader from "../../components/banner/Preloader";
 
 export default function InfoScreen() {
   return (

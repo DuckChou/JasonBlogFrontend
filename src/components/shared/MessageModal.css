@@ -1,0 +1,9 @@
+.close-button{
+  background-color: var(--cultured)!important;
+  border-color: var(--cultured)!important;
+  color: black!important;
+}
+
+.close-button:hover{
+  background-color: var(--light-gray-1)!important;
+}

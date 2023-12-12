@@ -32,7 +32,7 @@ export default function Preloader({ words }) {
       },
       index === 0 ? 1000 : 150
     );
-  }, [index]);
+  }, [index, words]);
 
   useEffect(() => {
     (async () => {

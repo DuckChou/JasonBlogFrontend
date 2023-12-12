@@ -1,0 +1,53 @@
+
+.menu-button{
+  padding: 10px;
+  border-radius: 20%;
+  background-color: var(--cultured);
+  border: 2px solid white;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.menu-button:hover{
+  border-color: rgba(104, 147, 226, 0.5);
+  box-shadow: 0 0 40px rgb(29, 85, 189); /* Horizontal offset, vertical offset, blur radius, color */
+
+}
+
+
+.menu-button .span{
+  background-color: var(--eerie-black);
+  width: 30px;
+  height: 3px;
+  display: block;
+  transition: var(--transition-1);
+}
+
+
+
+.menu-button .span:not(:last-child) {
+  margin-block-end: 7px;
+}
+
+.offcanvas-header{
+  font-size: var(--fs-5);
+}
+
+
+
+.admin-header-ul li:hover{
+  background-color: var(--light-gray-1);
+  /* font-size: var(--fs-1); */
+}
+
+.admin-header-ul li {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  padding: 1rem 0.5rem;
+  transition: all 0.3s;
+}
+
+.admin-header-ul li:hover{
+  transform: translateX(1rem);
+  cursor: pointer;
+}
+
