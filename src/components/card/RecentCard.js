@@ -14,11 +14,10 @@ export default function RecentCard(props) {
           <Link to={process.env.REACT_APP_FRONTEND_URL + `/post/${props.id}`}>
             <LazyLoadImage
               src={process.env.REACT_APP_ASSET_URL + `/${props.thumbnail}`}
-              width="300"
-              height="360"
               effect="blur"
               alt="thumbnail"
               className="img-cover"
+              wrapperProps={{ style: { width: "100%" } }}
             />
           </Link>
 
