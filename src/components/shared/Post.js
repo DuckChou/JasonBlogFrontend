@@ -7,6 +7,9 @@ import Badge from "react-bootstrap/Badge";
 import CommentModal from "./CommentModal";
 import ErrorModal from "./ErrorModal";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 import { useRef, useState, useEffect, useContext } from "react";
 
 import { AuthContext } from "../../shared/context/auth-context";
@@ -175,8 +178,9 @@ export default function Post({ post }) {
               />
             )}
             {post.uploadImage && (
-              <img
+              <LazyLoadImage
                 src={URL.createObjectURL(post.uploadImage)}
+                effect="blur"
                 alt="thumbnail"
                 className="w-100"
               />

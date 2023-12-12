@@ -1,6 +1,8 @@
-import myphoto from "../../assets/images/myphoto.png"
+import myphoto from "../../assets/images/myphoto.png";
 import { Link } from "react-router-dom";
 import { generateDate } from "../../shared/utils/getDate";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import "./Card.css";
 
@@ -17,12 +19,13 @@ export default function Card({
     <>
       <div className="blog-card">
         <figure className="card-banner img-holder">
-          <Link to={process.env.REACT_APP_FRONTEND_URL+`/post/${id}`}>
-            <img
-              src={process.env.REACT_APP_ASSET_URL+`/${thumbnail}`}
-              loading="lazy"
+          <Link to={process.env.REACT_APP_FRONTEND_URL + `/post/${id}`}>
+            <LazyLoadImage
+              src={process.env.REACT_APP_ASSET_URL + `/${thumbnail}`}
+              effect="blur"
               alt="thumbnail"
               className="thumbnail-cover"
+              wrapperProps={{ style: { width: "100%" } }}
             />
           </Link>
 
@@ -59,7 +62,7 @@ export default function Card({
 
           <h3 className="h4">
             <Link
-              to={process.env.REACT_APP_FRONTEND_URL+`/post/${id}`}
+              to={process.env.REACT_APP_FRONTEND_URL + `/post/${id}`}
               className="card-title hover:underline"
             >
               {title}
