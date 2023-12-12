@@ -19,7 +19,9 @@ export default function PostScreen() {
       } catch (err) {}
     };
     fetchPostById();
-    document.title = post.title;
+    if (post.title) {
+      document.title = post.title;
+    }
   }, [postId, sendRequest, post.title]);
 
   return (
