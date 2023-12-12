@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -34,7 +34,7 @@ export default function PostScreen() {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/posts/${postId}`
         );
-        // console.log(responseData.post.tags);
+
         setPost(responseData.post);
       } catch (err) {}
     };
@@ -72,6 +72,10 @@ export default function PostScreen() {
     navigate(`/admin/managePosts`);
   };
 
+  const imageChangeHandler = useCallback((image) => {
+    setImage(image);
+  }, []);
+
   if (isPreview) {
     return (
       <>
@@ -87,7 +91,15 @@ export default function PostScreen() {
         />
         <ErrorModal error={error} onClear={clearError} />
         <div>
-          <Post post={{ ...post, isAdmin: true }} />
+          <Post
+            post={{
+              ...post,
+              thumbnail: !image ? post.thumbnail : null,
+              uploadImage: image ? image : null,
+
+              isAdmin: true,
+            }}
+          />
           <div className="d-flex justify-content-evenly mt-5">
             <button className="btn" onClick={(e) => setIsPreview(false)}>
               Return
@@ -186,10 +198,9 @@ export default function PostScreen() {
           </div>
           <h1 className="mb-4">Thumbnail</h1>
           <ImageUpload
-            imageSubmit={(image) => {
-              setImage(image);
-            }}
+            imageSubmit={imageChangeHandler}
             image={post.thumbnail}
+            uploadImage={image}
           />
 
           <h1 className="mb-4">Content</h1>

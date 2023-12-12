@@ -4,10 +4,15 @@ function ImageUpload(props) {
   const [selectedImage, setSelectedImage] = useState();
 
   useEffect(() => {
-    if (props.image) {
-      setSelectedImage(process.env.REACT_APP_ASSET_URL+`/${props.image}`);
+    if(props.uploadImage){
+      setSelectedImage(URL.createObjectURL(props.uploadImage));
+    }else{
+      setSelectedImage(process.env.REACT_APP_ASSET_URL + `/${props.image}`);
     }
-  }, [props.image]);
+    // if (props.image) {
+    //   setSelectedImage(process.env.REACT_APP_ASSET_URL + `/${props.image}`);
+    // }
+  }, [props.image, props.uploadImage]);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
