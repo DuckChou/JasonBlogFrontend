@@ -42,7 +42,7 @@ export default function Preloader({ words }) {
         window.scrollTo(0, 0);
       }, words.length * 200 + 600);
     })();
-  }, []);
+  }, [words.length]);
 
   const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${
     dimension.height
