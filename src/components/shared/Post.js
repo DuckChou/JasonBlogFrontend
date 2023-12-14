@@ -22,6 +22,7 @@ import { generateDate } from "../../shared/utils/getDate";
 import "./Post.css";
 import Review from "./Review";
 import Button from "react-bootstrap/Button";
+import MySpinner from "../layout/MySpinner";
 
 const stringReplace = (markdownText) => {
   const transformedText = markdownText.replace(
@@ -219,28 +220,30 @@ export default function Post({ post }) {
                   send
                 </Button>
                 <h4>All comments</h4>
-                {reviews.length === 0 && (
+                {reviews.length === 0 && !isLoading && (
                   <h3>
                     <Badge bg="success">
                       No comments yet. Leave first comment!
                     </Badge>
                   </h3>
                 )}
-                {reviews.map((review) => {
-                  return (
-                    <Review
-                      key={review.id}
-                      avatar={review.creatorAvatar}
-                      content={review.content}
-                      username={review.creatorName}
-                      date={review.date}
-                      id={review.id}
-                      creatorId={review.creatorId}
-                      onTrigger={() => setTrigger(!trigger)}
-                      // creatorId={review.creatorId}
-                    />
-                  );
-                })}
+                {isLoading && <MySpinner />}
+                {reviews.length > 0 &&
+                  reviews.map((review) => {
+                    return (
+                      <Review
+                        key={review.id}
+                        avatar={review.creatorAvatar}
+                        content={review.content}
+                        username={review.creatorName}
+                        date={review.date}
+                        id={review.id}
+                        creatorId={review.creatorId}
+                        onTrigger={() => setTrigger(!trigger)}
+                        // creatorId={review.creatorId}
+                      />
+                    );
+                  })}
               </div>
             )}
           </Col>
