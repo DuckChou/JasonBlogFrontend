@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Preloader from "../../components/banner/Preloader";
 import Post from "../../components/shared/Post";
+import MySpinner from "../../components/layout/MySpinner";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
 export default function PostScreen() {
   const postId = useParams().id;
   const [post, setPost] = useState({});
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading } = useHttpClient();
 
   useEffect(() => {
     const fetchPostById = async () => {
@@ -27,7 +28,8 @@ export default function PostScreen() {
   return (
     <>
       <Preloader words={["Post"]} />
-      <Post post={post} />
+      {isLoading && <MySpinner />}
+      {!isLoading && <Post post={post} />}
     </>
   );
 }
