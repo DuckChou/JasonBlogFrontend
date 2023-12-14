@@ -28,7 +28,11 @@ export default function PostScreen() {
   return (
     <>
       <Preloader words={["Post"]} />
-      {isLoading && <MySpinner />}
+      {isLoading && (
+        <div className="container">
+          <MySpinner />
+        </div>
+      )}
       {!isLoading && <Post post={post} />}
     </>
   );
