@@ -24,6 +24,7 @@ import AdminHeader from "./components/view/AdminHeader";
 import AdminLogin from "./screens/Admin/AdminLogin";
 import AdminUpdatePost from "./screens/Admin/AdminUpdatePost";
 import AdminManageReviews from "./screens/Admin/AdminManageReviews";
+import TokenRedirect from "./screens/Client/TokenRedirect";
 
 function AdminRoutes() {
   const auth = useContext(AuthContext);
@@ -146,6 +147,7 @@ function AppContent() {
               </>
             }
           />
+          <Route path="/:tokenId" element={<TokenRedirect />} />
           <Route
             path="*"
             element={

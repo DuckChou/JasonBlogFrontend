@@ -6,6 +6,7 @@ import { useForm } from "../../shared/hooks/form-hook";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import GoogleButton from "react-google-button";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -46,7 +47,7 @@ export default function LoginModal(props) {
     }
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL+"/users/login",
+        process.env.REACT_APP_BACKEND_URL + "/users/login",
         "POST",
         JSON.stringify({
           email: formState.inputs.email.value,
@@ -58,6 +59,16 @@ export default function LoginModal(props) {
       );
       props.onHide();
       auth.login(responseData.userId, responseData.token, responseData.image);
+    } catch (err) {}
+  };
+
+  const googleLoginHandler = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_BACKEND_URL + "/users/googleLogin",
+        "_self"
+      );
+      // auth.login(responseData.userId, responseData.token, responseData.image);
     } catch (err) {}
   };
 
@@ -139,6 +150,10 @@ export default function LoginModal(props) {
                 Loading...
               </Button>
             )}
+            <hr />
+            <div className="d-flex justify-content-center">
+              <GoogleButton onClick={googleLoginHandler} />
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
