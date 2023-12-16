@@ -6,6 +6,7 @@ import { useForm } from "../../shared/hooks/form-hook";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import GithubButton from "react-github-login-button";
 import GoogleButton from "react-google-button";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -66,6 +67,16 @@ export default function LoginModal(props) {
     try {
       window.open(
         process.env.REACT_APP_BACKEND_URL + "/users/googleLogin",
+        "_self"
+      );
+      // auth.login(responseData.userId, responseData.token, responseData.image);
+    } catch (err) {}
+  };
+
+  const githubLoginHandler = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_BACKEND_URL + "/users/githubLogin",
         "_self"
       );
       // auth.login(responseData.userId, responseData.token, responseData.image);
@@ -151,8 +162,11 @@ export default function LoginModal(props) {
               </Button>
             )}
             <hr />
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center mb-3">
               <GoogleButton onClick={googleLoginHandler} />
+            </div>
+            <div className="d-flex justify-content-center">
+              <GithubButton onClick={githubLoginHandler} />
             </div>
           </Form>
         </Modal.Body>

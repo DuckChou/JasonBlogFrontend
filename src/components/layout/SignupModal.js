@@ -17,6 +17,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ErrorModal from "../shared/ErrorModal";
 import Spinner from "react-bootstrap/Spinner";
+import GoogleButton from "react-google-button";
+import GithubButton from "react-github-login-button";
 
 export default function SignupModal(props) {
   const auth = useContext(AuthContext);
@@ -60,7 +62,7 @@ export default function SignupModal(props) {
     }
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL+"/users/signup",
+        process.env.REACT_APP_BACKEND_URL + "/users/signup",
         "POST",
         JSON.stringify({
           username: formState.inputs.username.value,
@@ -73,6 +75,26 @@ export default function SignupModal(props) {
       );
       props.onHide();
       auth.login(responseData.userId, responseData.token, responseData.image);
+    } catch (err) {}
+  };
+
+  const googleLoginHandler = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_BACKEND_URL + "/users/googleLogin",
+        "_self"
+      );
+      // auth.login(responseData.userId, responseData.token, responseData.image);
+    } catch (err) {}
+  };
+
+  const githubLoginHandler = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_BACKEND_URL + "/users/githubLogin",
+        "_self"
+      );
+      // auth.login(responseData.userId, responseData.token, responseData.image);
     } catch (err) {}
   };
 
@@ -210,6 +232,13 @@ export default function SignupModal(props) {
                 Loading...
               </Button>
             )}
+            <hr />
+            <div className="d-flex justify-content-center mb-3">
+              <GoogleButton onClick={googleLoginHandler} />
+            </div>
+            <div className="d-flex justify-content-center">
+              <GithubButton onClick={githubLoginHandler} />
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
