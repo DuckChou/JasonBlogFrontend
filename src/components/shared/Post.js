@@ -61,6 +61,13 @@ export default function Post({ post }) {
     }
   }, [sendRequest, post.id, trigger]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   const auth = useContext(AuthContext);
 
   const textArea = useRef(null);
@@ -81,7 +88,8 @@ export default function Post({ post }) {
     setTextAreaValue(e.target.value);
   };
 
-  const md = new MarkdownIt();
+  const md = new MarkdownIt({ html: true });
+  
   let markdownText;
   let h2Texts = [];
   let result;
