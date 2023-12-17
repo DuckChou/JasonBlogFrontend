@@ -208,8 +208,8 @@ export default function PostScreen() {
             <MDEditor
               height={500}
               value={post.markdown || ""}
-              onChange={() => {
-                setPost({ ...post, markdown: post.markdown });
+              onChange={(e) => {
+                setPost({ ...post, markdown: e });
               }}
             />
           </div>
