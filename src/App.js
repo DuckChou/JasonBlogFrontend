@@ -11,6 +11,7 @@ import {
 import { useContext } from "react";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
+import { jwtDecode } from "jwt-decode";
 
 import PostScreen from "./screens/Client/PostScreen";
 import TechPostGalleryScreen from "./screens/Client/TechPostGalleryScreen";
@@ -29,7 +30,7 @@ import TokenRedirect from "./screens/Client/TokenRedirect";
 function AdminRoutes() {
   const auth = useContext(AuthContext);
 
-  if (!auth.isLoggedIn) {
+  if (!auth.isLoggedIn||!jwtDecode(auth.token).isAdmin) {
     return (
       <Routes>
         <Route path="/AdminLogin" element={<AdminLogin />} />
