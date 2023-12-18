@@ -73,11 +73,14 @@ export default function Post({ post }) {
   const textArea = useRef(null);
 
   const onEmojiClick = (emojiObject) => {
-    setTextAreaValue(
-      textAreaValue.slice(0, textArea.current.selectionStart) +
+    setTextAreaValue((textAreaValue) => {
+      return (
+        textAreaValue.slice(0, textArea.current.selectionStart) +
         emojiObject.emoji +
         textAreaValue.slice(textArea.current.selectionEnd)
-    );
+      );
+    });
+    setShowEmoji(false);
   };
 
   const openEmojiHandler = () => {
