@@ -177,7 +177,7 @@ export default function Post({ post }) {
               </div>
               <div className="profile-content">
                 <p className="name">Jason Zhou</p>
-                <p>{generateDate(post.date)} / 100 views</p>
+                <p>{generateDate(post.date)} / {post.views} views</p>
               </div>
             </div>
 

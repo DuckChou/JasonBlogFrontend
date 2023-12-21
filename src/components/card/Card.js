@@ -42,7 +42,7 @@ export default function Card({
             </li>
           </ul>
           <div href="#" className="view-tag">
-            {viewCount || "100 views"}
+            {viewCount + " views"}
           </div>
         </figure>
 

@@ -92,7 +92,7 @@ export default function Home() {
                       intro={post.intro}
                       tags={post.tags}
                       date={post.date}
-                      viewCount={post.viewCount}
+                      viewCount={post.views}
                       id={post.id}
                     />
                   </li>
@@ -123,7 +123,7 @@ export default function Home() {
                       intro={post.intro}
                       tags={post.tags}
                       date={post.date}
-                      viewCount={post.viewCount}
+                      viewCount={post.views}
                       id={post.id}
                     />
                   </li>
