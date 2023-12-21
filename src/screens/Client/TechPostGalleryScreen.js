@@ -58,6 +58,7 @@ function TechPostGalleryScreen() {
                         thumbnail={post.thumbnail}
                         date={post.date}
                         tags={post.tags}
+                        viewCount={post.views}
                       />
                     </li>
                   );
