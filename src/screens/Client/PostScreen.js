@@ -20,10 +20,13 @@ export default function PostScreen() {
       } catch (err) {}
     };
     fetchPostById();
+  }, [postId, sendRequest]);
+
+  useEffect(() => {
     if (post.title) {
       document.title = post.title;
     }
-  }, [postId, sendRequest, post.title]);
+  }, [post.title]);
 
   return (
     <>
