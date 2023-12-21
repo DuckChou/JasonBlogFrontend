@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useNavigate } from "react-router-dom";
-
+import { jwtDecode } from "jwt-decode";
 
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -34,7 +34,7 @@ export default function AdminHeader() {
             Jason's Blog Admin
           </a>
 
-          {auth.isLoggedIn && (
+          {auth.isLoggedIn && jwtDecode(auth.token).isAdmin && (
             <>
               <button
                 variant="primary"
