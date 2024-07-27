@@ -15,9 +15,22 @@ import {
   getDateString,
 } from "../../shared/utils/getDate";
 
+import dayjs from "dayjs";
+
 import { url, getDate, getTime } from "../../shared/utils/getWeather";
 import { AuthContext } from "../../shared/context/auth-context";
 import axios from "axios";
+
+function isToday(dateString) {
+  // 创建一个 Day.js 对象
+  const date = dayjs(dateString);
+
+  // 获取当前本地时间的 Day.js 对象
+  const now = dayjs();
+
+  // 使用 isSame 方法比较日期
+  return date.isSame(now, "day");
+}
 
 export default function ChatBox() {
   const [isChat, setChat] = useState(false);
@@ -44,7 +57,11 @@ export default function ChatBox() {
         process.env.REACT_APP_BACKEND_URL + "/chat/getChats"
       );
 
-      setAllMessages(response.data.chats);
+      const todayMessages = response.data.chats.filter((message) => {
+        return isToday(message.date);
+      });
+
+      setAllMessages(todayMessages);
       setIsMessageLoading(false);
     } catch (error) {
       console.log(error);
@@ -156,7 +173,7 @@ export default function ChatBox() {
     try {
       setIsAddNewMessageLoading(true);
       const response = await axios.post(
-        process.env.REACT_APP_BACKEND_URL+"/chat/addChat",
+        process.env.REACT_APP_BACKEND_URL + "/chat/addChat",
         newMessage,
         {
           headers: {
@@ -199,14 +216,14 @@ export default function ChatBox() {
           </div>
           <div className="messages">
             <div className="messages-content" ref={scrollRef}>
-              <p style={{ textAlign: "center" }}>{generateTime()}</p>
+              <p style={{ textAlign: "center" }}>{dayjs().format("HH:mm")}</p>
 
               <div className="message new">
                 <figure className="avatar">
                   <img src={myPhoto} />
                 </figure>
                 Hi there, I'm Jason Zhou. Today is {getDateString()}.
-                <div className="timestamp">{generateTime()}</div>
+                <div className="timestamp">{dayjs().format("HH:mm")}</div>
               </div>
 
               {Object.keys(weather).length > 0 &&
@@ -221,7 +238,7 @@ export default function ChatBox() {
                     temperature right now is {weather.temp}°c. Sun rises at{" "}
                     {getTime(weather.sunrise, weather.timezone)} and sets at{" "}
                     {getTime(weather.sunset, weather.timezone)}.
-                    <div className="timestamp">{generateTime()}</div>
+                    <div className="timestamp">{dayjs().format("HH:mm")}</div>
                   </div>
                 ))}
 
@@ -242,7 +259,7 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {generateTimeFromString(message.date)}
+                          {dayjs(message.date).format("HH:mm")}
                         </div>
                       </div>
                     );
@@ -254,7 +271,7 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {generateTimeFromString(message.date)}
+                          {dayjs(message.date).format("HH:mm")}
                         </div>
                       </div>
                     );
