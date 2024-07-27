@@ -147,6 +147,7 @@ Messages
   bottom: -19px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
+  min-width: 100px;
 }
 .messages .message::before {
   content: "";
@@ -176,6 +177,7 @@ Messages
   right:2px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
+  min-width: 100px;
 }
 
 .messages .message .avatar-self {
