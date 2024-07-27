@@ -223,7 +223,7 @@ export default function ChatBox() {
                   <img src={myPhoto} />
                 </figure>
                 Hi there, I'm Jason Zhou. Today is {getDateString()}.
-                <div className="timestamp">{dayjs().format("HH:mm")}</div>
+                <div className="timestamp">message from Jason Zhou</div>
               </div>
 
               {Object.keys(weather).length > 0 &&
@@ -238,7 +238,7 @@ export default function ChatBox() {
                     temperature right now is {weather.temp}°c. Sun rises at{" "}
                     {getTime(weather.sunrise, weather.timezone)} and sets at{" "}
                     {getTime(weather.sunset, weather.timezone)}.
-                    <div className="timestamp">{dayjs().format("HH:mm")}</div>
+                    <div className="timestamp">message from Jason Zhou</div>
                   </div>
                 ))}
 
