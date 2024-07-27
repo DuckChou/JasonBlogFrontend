@@ -26,11 +26,12 @@ import AdminLogin from "./screens/Admin/AdminLogin";
 import AdminUpdatePost from "./screens/Admin/AdminUpdatePost";
 import AdminManageReviews from "./screens/Admin/AdminManageReviews";
 import TokenRedirect from "./screens/Client/TokenRedirect";
+import ChatBox from "./components/chatbox/ChatBox";
 
 function AdminRoutes() {
   const auth = useContext(AuthContext);
 
-  if (!auth.isLoggedIn||!jwtDecode(auth.token).isAdmin) {
+  if (!auth.isLoggedIn || !jwtDecode(auth.token).isAdmin) {
     return (
       <Routes>
         <Route path="/AdminLogin" element={<AdminLogin />} />
@@ -83,6 +84,38 @@ function AdminRoutes() {
   );
 }
 
+// function InfoRoutes() {
+//   const auth = useContext(AuthContext);
+
+//   if (!auth.isLoggedIn) {
+//     return (
+//       <Routes>
+//         <Route
+//           path="*"
+//           element={
+//             <>
+//               <NotFound mes={"login first to access info. "} nav={"/"} />
+//             </>
+//           }
+//         />
+//       </Routes>
+//     );
+//   }
+//   return (
+//     <Routes>
+//       <Route path="/" element={<InfoScreen />} />
+//       <Route
+//         path="*"
+//         element={
+//           <>
+//             <NotFound mes={"404: Page not found. "} nav={"/"} />
+//           </>
+//         }
+//       />
+//     </Routes>
+//   );
+// }
+
 function AppContent() {
   const location = useLocation();
 
@@ -107,6 +140,7 @@ function AppContent() {
               <>
                 <Header />
                 <Home />
+                <ChatBox />
               </>
             }
           />
