@@ -449,3 +449,10 @@ Bounce
     transform: translateY(-10px);
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .chat{
+    width: 90%;
+    bottom:-630px;
+  }
+}
