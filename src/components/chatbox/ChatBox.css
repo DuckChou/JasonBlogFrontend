@@ -144,8 +144,8 @@ Messages
 }
 .messages .message .timestamp {
   position: absolute;
-  bottom: -25px;
-  font-size: 15px;
+  bottom: -19px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
 }
 .messages .message::before {
@@ -172,9 +172,9 @@ Messages
 
 .messages .message-personal .timestamp {
   position: absolute;
-  bottom: -25px;
-  right:7px;
-  font-size: 15px;
+  bottom: -20px;
+  right:2px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
 }
 

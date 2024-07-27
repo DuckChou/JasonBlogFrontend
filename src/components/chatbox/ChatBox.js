@@ -259,7 +259,7 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {dayjs(message.date).format("HH:mm")}
+                          {dayjs(message.date).format("HH:mm")} - {message.user.username}
                         </div>
                       </div>
                     );
@@ -271,7 +271,7 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {dayjs(message.date).format("HH:mm")}
+                          {dayjs(message.date).format("HH:mm")} - {message.user.username}
                         </div>
                       </div>
                     );
