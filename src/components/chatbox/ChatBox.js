@@ -46,6 +46,9 @@ export default function ChatBox() {
   const { isLoggedIn, token, userId } = useContext(AuthContext);
 
   const scrollRef = useRef();
+
+  const inputRef = useRef();
+
   const handleChat = () => {
     setChat(!isChat);
   };
@@ -91,40 +94,6 @@ export default function ChatBox() {
     }
   };
 
-  // const fetchAll = async () => {
-  //   try {
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(async (position) => {
-  //         const { latitude, longitude } = position.coords;
-  //         const response_weather = await fetch(
-  //           url.currentWeather("lat=" + latitude, "lon=" + longitude)
-  //         );
-  //         const data = await response_weather.json();
-  //         setWeather({
-  //           temp: data.main.temp,
-  //           city: data.name,
-  //           description: data.weather[0].description,
-  //           country: data.sys.country,
-  //           sunrise: data.sys.sunrise,
-  //           sunset: data.sys.sunset,
-  //           timezone: data.timezone,
-  //         });
-
-  //         const response = await axios.get(
-  //           "http://localhost:4000/api/chat/getChats"
-  //         );
-  //         setAllMessages(response.data.chats);
-  //       });
-  //     } else {
-  //       const response = await axios.get(
-  //         "http://localhost:4000/api/chat/getChats"
-  //       );
-  //       setAllMessages(response.data.chats);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
@@ -287,6 +256,11 @@ export default function ChatBox() {
               placeholder="Type message..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  newMessageHandler();
+                }
+              }}
             />
             <button
               type="submit"
