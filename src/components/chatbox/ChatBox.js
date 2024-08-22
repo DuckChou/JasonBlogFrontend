@@ -49,6 +49,8 @@ export default function ChatBox() {
 
   const audio = new Audio(qq);
 
+  const audioRef = useRef(new Audio(qq));
+
   const scrollRef = useRef();
 
   const inputRef = useRef();
@@ -122,7 +124,8 @@ export default function ChatBox() {
     socket.on("chat", (data) => {
       setAllMessages((prevMessages) => [...prevMessages, data.chat]);
       if (data.userId !== userId) {
-        audio.play();
+        // audio.play();
+        playNotificationSound();
       }
     });
     return () => {
@@ -165,6 +168,37 @@ export default function ChatBox() {
       console.log(error);
     }
   };
+
+  const playNotificationSound = () => {
+    // 确保音频引用已初始化并已解锁
+    if (audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error("音频播放被阻止:", error);
+      });
+    }
+  };
+
+  // 在用户初次交互时播放音频
+  const handleUserInteraction = () => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          audioRef.current.pause(); // 播放一瞬间后暂停，这样后续可以直接播放
+        })
+        .catch((error) => {
+          console.error("初始音频播放失败:", error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    // 监听用户初次交互事件
+    document.addEventListener("click", handleUserInteraction, { once: true });
+    return () => {
+      document.removeEventListener("click", handleUserInteraction);
+    };
+  }, []);
 
   return (
     <>
