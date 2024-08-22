@@ -131,7 +131,7 @@ export default function ChatBox() {
     return () => {
       socket.off("chat");
     };
-  }, []);
+  }, [userId]);
 
   const newMessageHandler = async () => {
     // Check if user is logged in
