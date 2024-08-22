@@ -21,6 +21,8 @@ import { url, getDate, getTime } from "../../shared/utils/getWeather";
 import { AuthContext } from "../../shared/context/auth-context";
 import axios from "axios";
 
+import qq from "../../assets/audio/1688.mp3";
+
 function isToday(dateString) {
   // 创建一个 Day.js 对象
   const date = dayjs(dateString);
@@ -44,6 +46,8 @@ export default function ChatBox() {
   const [isAddNewMessageLoading, setIsAddNewMessageLoading] = useState(false);
 
   const { isLoggedIn, token, userId } = useContext(AuthContext);
+
+  const audio = new Audio(qq);
 
   const scrollRef = useRef();
 
@@ -94,7 +98,6 @@ export default function ChatBox() {
     }
   };
 
-
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
       if (isChat) {
@@ -115,8 +118,12 @@ export default function ChatBox() {
 
   useEffect(() => {
     const socket = openSocket("https://jason-blog-961ffd3cf608.herokuapp.com");
+    // const socket = openSocket("http://localhost:4000/");
     socket.on("chat", (data) => {
       setAllMessages((prevMessages) => [...prevMessages, data.chat]);
+      if (data.userId !== userId) {
+        audio.play();
+      }
     });
     return () => {
       socket.off("chat");
@@ -228,7 +235,8 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {dayjs(message.date).format("HH:mm")} - {message.user.username}
+                          {dayjs(message.date).format("HH:mm")} -{" "}
+                          {message.user.username}
                         </div>
                       </div>
                     );
@@ -240,7 +248,8 @@ export default function ChatBox() {
                         </figure>
                         {message.message}
                         <div className="timestamp">
-                          {dayjs(message.date).format("HH:mm")} - {message.user.username}
+                          {dayjs(message.date).format("HH:mm")} -{" "}
+                          {message.user.username}
                         </div>
                       </div>
                     );
