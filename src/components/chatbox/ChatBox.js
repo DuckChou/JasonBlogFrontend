@@ -123,7 +123,7 @@ export default function ChatBox() {
     // const socket = openSocket("http://localhost:4000/");
     socket.on("chat", (data) => {
       setAllMessages((prevMessages) => [...prevMessages, data.chat]);
-      if (data.userId !== userId) {
+      if (data.userId !== userId || !userId) {
         // audio.play();
         playNotificationSound();
       }
@@ -131,7 +131,7 @@ export default function ChatBox() {
     return () => {
       socket.off("chat");
     };
-  }, [userId]);
+  }, []);
 
   const newMessageHandler = async () => {
     // Check if user is logged in
